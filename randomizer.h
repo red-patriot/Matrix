@@ -1,25 +1,31 @@
 #ifndef randomizer_h_INCLUDED
 #define randomizer_h_INCLUDED
 
-/* random_letter.h
- * A class which generates random letters. 
- */
-
 #include <random>
+
+#include "matrix.h"
 
 class Randomizer {
 public:
-  Randomizer(class Matrix* m);
-  ~Randomizer();
+  Randomizer(Matrix* m) :
+    matrix(m),
+    choice_threshold(3) ,
+    rdev(),
+    rng(rdev()),
+    choice_dist(0, 10),
+    char_dist(0, sizeof(char_options)/sizeof(*char_options) -1),
+    screen_width(0, matrix->get_window_width()) { }
+  
+  ~Randomizer() { }
 
-  size_t screen_position();
-  char rand_char();
-  bool choice();
+  size_t screen_position() { return screen_width(rng); }
+  char rand_char() { return char_options[char_dist(rng)]; }
+  bool choice() { return choice_dist(rng) <= choice_threshold; }
 
 private:
-  class Matrix* matrix;
-  static const char char_options[];
-
+  Matrix* matrix;
+  
+  static constexpr char char_options[] = "aáâãàbcçdeéèêẽfghiíìîĩjklmnoóòôõpqrstuúùûũvwxyzABCÇDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^&*()_+-=~`{}|[]\\:\";',./<>?";
   unsigned int choice_threshold;
   
   std::random_device rdev;
