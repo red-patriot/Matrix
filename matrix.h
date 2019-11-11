@@ -6,12 +6,11 @@
 #include <list>
 
 struct Letter {
-  /* A Representation of a single letter in the Matrix. */
-  char letter;
-  SDL_Color color{255, 255, 255, 255};
+  char character;
   int x{0};
   int y{0};
-  bool create_next{true};
+  SDL_Color color{255, 255, 255, 255};
+  bool create_new{true};
 
   void update(float delta_time);
 };
@@ -19,13 +18,13 @@ struct Letter {
 class Matrix {
 public:
   Matrix();
-  ~Matrix();
 
   bool init();
+  void shutdown();
 
   void run_loop();
-
-  size_t get_window_width() const { return window_size.w; }
+  
+  size_t get_screen_width() const { return window_size.w; }
 
 private:
   SDL_Window* window;
@@ -35,28 +34,24 @@ private:
   TTF_Font* font;
   int fontsize;
 
-  class Randomizer* randomizer;
-
+  bool updating_letters;
   std::list<Letter> letters;
-  SDL_Texture* letter_img;
-  SDL_Rect letter_rect;
-  char character[2];
-
-  bool running;
+  std::list<Letter> pending_letters;
+  char letter_character[2];
+  
+  bool is_running;
   Uint32 ticks;
 
-  void load_data();
-  void shutdown();
+  class Randomizer* randomizer;
 
-  // run_loop() helpers
-  void process_input();
+  // run_loop() helper functions
+  void handle_input();
   void update_world();
   void generate_output();
 
-  // letter functions
-  void create_letter(int x, int y);
-  void cascade_letter(Letter& let);
-  void render_letter(const Letter& let);
+  // Letter management functions
+  void create_new_letter(int new_x, int new_y);
+  void render_letter(const Letter& letter);
 };
 
 #endif
