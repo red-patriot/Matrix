@@ -7,6 +7,8 @@ int main() {
 
   if (!matrix.init()) {
     SDL_Log("Failed to create a Matrix system.");
+    // shutdown the matrix
+    matrix.shutdown();
     return -1;
   }
 

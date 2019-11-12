@@ -93,6 +93,9 @@ void Matrix::run_loop() {
     update_world();
     generate_output();
   }
+
+  // shutdown the matrix on exit.
+  shutdown();
 }
 
 void Matrix::handle_input() {
