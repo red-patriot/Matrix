@@ -1,4 +1,3 @@
-#include <iostream>
 #include <algorithm>
 
 #include "matrix.h"
@@ -164,8 +163,6 @@ void Matrix::update_world() {
 
 void Matrix::generate_output() {
   /* Generate the display. */
-  std::cout << letters.size() << '\n';
-  
   // clear the old screen
   SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
   SDL_RenderClear(renderer);
