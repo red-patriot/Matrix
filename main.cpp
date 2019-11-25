@@ -13,6 +13,7 @@ int main() {
   }
 
   matrix.run_loop();
+  matrix.shutdown();
 
   return 0;
 }

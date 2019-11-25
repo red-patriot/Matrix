@@ -18,8 +18,8 @@ public:
   
   ~Randomizer() { }
 
-  size_t screen_position() { return screen_width(rng); }
-  char rand_char() { return char_options[char_dist(rng)]; }
+  [[nodiscard]] size_t screen_position() { return screen_width(rng); }
+  [[nodiscard]] char rand_char() { return char_options[char_dist(rng)]; }
   bool choice(double chance=.50) { return choice_dist(rng) <= chance; }
 
 private:
