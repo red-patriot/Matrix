@@ -1,4 +1,3 @@
-#include <iostream>
 #include <algorithm>
 
 #include "matrix.h"
@@ -32,7 +31,7 @@ bool Matrix::init() {
   }
 
   // initialize TTF
-  if (TTF_Init() != 0) {
+  if (TTF_Init() != 0)  {
     SDL_Log("Failed to initialize TTF: %s", TTF_GetError());
     return false;
   }
@@ -56,7 +55,7 @@ bool Matrix::init() {
   }
 
   // load a font
-  const char* fontname = "../cour.ttf";
+  const char* fontname = "../matrix-font.ttf";
   font = TTF_OpenFont(fontname, fontsize);
   if (font == nullptr) {
     SDL_Log("Failed to load font: %s, %s", fontname, TTF_GetError());
@@ -167,8 +166,6 @@ void Matrix::update_world() {
 
 void Matrix::generate_output() {
   /* Generate the display. */
-  std::cout << letters.size() << '\n';
-  
   // clear the old screen
   SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
   SDL_RenderClear(renderer);

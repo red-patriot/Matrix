@@ -24,7 +24,7 @@ public:
 
   void run_loop();
   
-  size_t get_screen_width() const { return window_size.w; }
+  [[nodiscard, gnu::const]] size_t get_screen_width() const { return window_size.w; }
 
 private:
   SDL_Window* window;
@@ -47,11 +47,11 @@ private:
   // run_loop() helper functions
   void handle_input();
   void update_world();
-  void generate_output();
+  [[gnu::hot]] void generate_output();
 
   // Letter management functions
-  void create_new_letter(int new_x, int new_y);
-  void render_letter(const Letter& letter);
+  [[gnu::hot]] void create_new_letter(int new_x, int new_y);
+  [[gnu::hot]] void render_letter(const Letter& letter);
 };
 
 #endif
