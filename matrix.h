@@ -19,7 +19,7 @@ class Matrix {
 public:
   Matrix();
 
-  bool init();
+  [[nodiscard]] bool init();
   void shutdown();
 
   void run_loop();
